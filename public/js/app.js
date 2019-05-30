@@ -49147,15 +49147,32 @@ if (token) {
 /*!******************************!*\
   !*** ./resources/js/main.js ***!
   \******************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-//Codigo personalizado JS
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+ //Codigo personalizado JS
+
 new Vue({
   el: "#app-login",
   data: {
     usuario: "",
     password: ""
+  },
+  methods: {
+    iniciarSesion: function iniciarSesion() {
+      axios.post("/iniciar-sesion", {
+        usuario: this.usuario,
+        password: this.password
+      }).then(function (response) {
+        console.log(response);
+      })["catch"](function (err) {
+        console.log(err.response.data);
+      });
+    }
   }
 });
 
