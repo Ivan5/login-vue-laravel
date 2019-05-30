@@ -15,10 +15,30 @@ new Vue({
                     password: this.password
                 })
                 .then(response => {
-                    console.log(response);
+                    swal({
+                        title: "Has iniciado sesión",
+                        text: "Datos correctos",
+                        icon: "success",
+                        closeOnClickOutside: false,
+                        closeOnEsc: false
+                    }).then(select => {
+                        if (select) {
+                            location.reload();
+                        }
+                    });
                 })
                 .catch(err => {
-                    console.log(err.response.data);
+                    let er = err.response.data.errors;
+                    let mensaje = "Error no identificado";
+                    if (er.hasOwnProperty("usuario")) {
+                        mensaje = er.usuario[0];
+                    } else if (er.hasOwnProperty("password")) {
+                        mensaje = er.password[0];
+                    } else if (er.hasOwnProperty("login")) {
+                        mensaje = er.login[0];
+                    }
+
+                    swal("Error", mensaje, "error");
                 });
         }
     }
